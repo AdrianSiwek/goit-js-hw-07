@@ -5,7 +5,7 @@ const instance = basicLightbox.create(`
   <img src="" />
 `);
 
-const newImages = galleryItems
+const newImg = galleryItems
     .map(
         (image) =>
             `<div class="gallery__item">
@@ -21,7 +21,7 @@ const newImages = galleryItems
     )
     .join("");
 
-gallery.insertAdjacentHTML("beforeend", newImages);
+gallery.insertAdjacentHTML("beforeend", newImg);
 
 gallery.addEventListener("click", onOpenModal);
 
