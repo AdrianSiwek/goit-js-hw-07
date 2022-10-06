@@ -5,8 +5,8 @@ const instance = basicLightbox.create(`<img src="" />`);
 
 const newImg = galleryItems
     .map(
-        (image) => `<div class = "gallery_items">
-    <a class = "gallery__links" href="${image.original}">
+        (image) => `<div class="gallery_item">
+    <a class="gallery__links" href="${image.original}">
     <image
     class="gallery_img"
     src="${image.preview}"
@@ -22,5 +22,6 @@ gallery.insertAdjacentHTML("beforeend", newImg);
 gallery.addEventListener("click", onOpenModal);
 
 const url = instance.element().querySelector("img");
+
 
 console.log(galleryItems);
