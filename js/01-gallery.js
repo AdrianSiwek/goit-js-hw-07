@@ -1,27 +1,50 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 const gallery = document.querySelector("div.gallery");
-const instance = basicLightbox.create(`<img src="" />`);
+const instance = basicLightbox.create(`
+  <img src="" />
+`);
 
-const newImg = galleryItems
+const newImages = galleryItems
     .map(
-        (image) => `<div class="gallery_item">
-    <a class="gallery__links" href="${image.original}">
-    <image
-    class="gallery_img"
-    src="${image.preview}"
-    data-source="${image.original}"
-    alt="${image.description}"
+        (image) =>
+            `<div class="gallery__item">
+  <a class="gallery__link" href="${image.original}">
+    <img
+      class="gallery__image"
+      src="${image.preview}"
+      data-source="${image.original}"
+      alt="${image.description}"
     />
-    </a>
-    </div>`
+  </a>
+</div>`
     )
-    .join = ("");
+    .join("");
 
-gallery.insertAdjacentHTML("beforeend", newImg);
+gallery.insertAdjacentHTML("beforeend", newImages);
+
 gallery.addEventListener("click", onOpenModal);
 
 const url = instance.element().querySelector("img");
+
+function onOpenModal(event) {
+    event.preventDefault();
+    if (event.target.nodeName !== "IMG") {
+        return;
+    }
+    url.src = event.target.dataset.source;
+    instance.show();
+    window.addEventListener("keydown", onEscapeClick);
+}
+
+function onEscapeClick(event) {
+    if (event.key === "Escape") {
+        console.log("Close modal");
+        instance.close();
+        window.removeEventListener("keydown", onEscapeClick);
+        return;
+    }
+}
 
 
 console.log(galleryItems);
